@@ -131,16 +131,18 @@ posts.forEach(function (postElement) {
 
 
 
-    // // inserimento dell'immagine arry
-    // if (postElement.author.image == null){
-    //     postElement.author.image = `https://unsplash.it/300/300?image=10`;
-    // }
+    // inserimento dell'immagine arry
+    if (postElement.author.image == null){
+        postElement.author.image = `https://unsplash.it/300/300?image=10`;
+    }
 
 
 
 
 
 });
+
+const likeArray = [];
 
 const counterLikes = document.getElementsByClassName("js-likes-counter");
 
@@ -151,26 +153,31 @@ addLikeCounter.forEach(function (like, index) {
         event.preventDefault();
         console.log(this)
         let userLike = like.dataset.postid;
-        
 
-        // counterLikes[index].innerHTML++
+        const postClicked = like.classList.contains("red");
+
+
 
 
         //devi riuscire a leggere da "this" l'attributo "data-postid"
         //3
         // let datapost = ???
 
-        if (posts[index].id == userLike) {
+        if (postClicked) {
 
-            // console.log( posts[index].likes++)
 
-            let numberLike = posts[index].likes++;
+            counterLikes[index].innerHTML--;
+            like.classList.remove("red");
+
+           
+        } else{
+
+            counterLikes[index].innerHTML++;
+            like.classList.add("red");
+            likeArray.push(userLike);
             
-            // counterLikes[index].innerHTML++
-            // counterLikes[index].likes++;
+            console.log(likeArray)
 
-
-            like.classList.toggle("red")
         }
 
 
@@ -189,3 +196,18 @@ addLikeCounter.forEach(function (like, index) {
 
 //     likeCounter.forEach()
 //  }
+
+
+// Prime prove nel Ciclo if //
+
+
+
+ // let numberLike = posts[index].likes++;
+
+            // numberLike.push(likeArray)
+
+            // counterLikes[index].innerHTML++
+            // counterLikes[index].likes++;
+
+
+            // like.classList.toggle("red")
