@@ -12,11 +12,21 @@ Non è necessario creare date casuali Per le immagini va bene utilizzare qualsia
  servizio di placeholder ad es. Unsplash (https://unsplash.it/300/300?image=<id>) V
 
 Milestone 2 - Prendendo come riferimento il layout di esempio presente nell'html,
- stampiamo i post del nostro feed. 
+ stampiamo i post del nostro feed. V
 
 Milestone 3 - Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone
  e incrementiamo il counter dei likes relativo. Salviamo in un secondo array gli id dei post
-  ai quali abbiamo messo il like.
+  ai quali abbiamo messo il like. 
+
+BONUS
+Formattare le date in formato italiano (gg/mm/aaaa)
+
+Gestire l'assenza dell'immagine profilo con un elemento di fallback
+ che contiene le iniziali dell'utente (es. Luca Formicola > LF).
+
+Al click su un pulsante "Mi Piace" di un post,
+ se abbiamo già cliccato dobbiamo decrementare il contatore e cambiare il colore del bottone.
+
 
 */
 
@@ -79,13 +89,13 @@ const posts = [
 ];
 
 
- const postList = document.getElementById("container");
+const postList = document.getElementById("container");
 
- posts.forEach(function(postElement){
+posts.forEach(function (postElement) {
 
     console.log(postElement)
 
-    postList.innerHTML+=`
+    postList.innerHTML += `
     <div class="post">
     <div class="post__header">
         <div class="post-meta">                    
@@ -105,13 +115,13 @@ const posts = [
     <div class="post__footer">
         <div class="likes js-likes">
             <div class="likes__cta">
-                <a class="like-button  js-like-button" href="#" data-postid="1">
+                <a class="like-button  js-like-button" href="#" data-postid="${postElement.id}">
                     <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                     <span class="like-button__label">Mi Piace</span>
                 </a>
             </div>
             <div class="likes__counter">
-                Piace a <b id="like-counter-1" class="js-likes-counter">${postElement.likes}</b> persone
+                Piace a <b id="like-counter-${postElement.id}" class="js-likes-counter">${postElement.likes}</b> persone
             </div>
         </div> 
     </div>    
@@ -121,7 +131,61 @@ const posts = [
 
 
 
+    // // inserimento dell'immagine arry
+    // if (postElement.author.image == null){
+    //     postElement.author.image = `https://unsplash.it/300/300?image=10`;
+    // }
 
 
- });
 
+
+
+});
+
+const counterLikes = document.getElementsByClassName("js-likes-counter");
+
+const addLikeCounter = document.querySelectorAll(".js-like-button");
+addLikeCounter.forEach(function (like, index) {
+
+    like.addEventListener("click", function () {
+        event.preventDefault();
+        console.log(this)
+        let userLike = like.dataset.postid;
+        
+
+        // counterLikes[index].innerHTML++
+
+
+        //devi riuscire a leggere da "this" l'attributo "data-postid"
+        //3
+        // let datapost = ???
+
+        if (posts[index].id == userLike) {
+
+            // console.log( posts[index].likes++)
+
+            let numberLike = posts[index].likes++;
+            
+            // counterLikes[index].innerHTML++
+            // counterLikes[index].likes++;
+
+
+            like.classList.toggle("red")
+        }
+
+
+
+
+    })
+});
+
+
+
+
+
+//  function addLike (number){
+
+//     const likeCounter = document.querySelectorAll(".js-likes-button");
+
+//     likeCounter.forEach()
+//  }
