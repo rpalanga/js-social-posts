@@ -91,7 +91,10 @@ const posts = [
 
 const postList = document.getElementById("container");
 
+
 posts.forEach(function (postElement) {
+
+    
 
     console.log(postElement)
 
@@ -104,7 +107,7 @@ posts.forEach(function (postElement) {
             </div>
             <div class="post-meta__data">
                 <div class="post-meta__author">${postElement.author.name}</div>
-                <div class="post-meta__time">${postElement.created}</div>
+                <div class="post-meta__time">${postElement.created.split("-").reverse().join("-")}</div>
             </div>                    
         </div>
     </div>
@@ -131,10 +134,10 @@ posts.forEach(function (postElement) {
 
 
 
-    // inserimento dell'immagine arry
-    if (postElement.author.image == null){
-        postElement.author.image = `https://unsplash.it/300/300?image=10`;
-    }
+    // // inserimento dell'immagine arry
+    // if (postElement.author.image == null){
+    //     postElement.author.image  `https://unsplash.it/300/300?image=10`;
+    // }
 
 
 
@@ -168,6 +171,7 @@ addLikeCounter.forEach(function (like, index) {
 
             counterLikes[index].innerHTML--;
             like.classList.remove("red");
+            likeArray.shift(userLike)
 
            
         } else{
